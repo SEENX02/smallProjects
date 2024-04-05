@@ -968,4 +968,374 @@ public static void main(String[] args)
 SwingUtilities.invokeLater(() -> {
 JFrame frame = new JFrame("MouseClick Event Demo");
 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//////////////////////////////////////////////////////////////////////////
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class AllKeyEvents {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("All Key Events");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JTextField textField = new JTextField(20);
+        frame.add(textField);
+
+        textField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                System.out.println("Key Typed: " + e.getKeyChar());
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                System.out.println("Key Pressed: " + KeyEvent.getKeyText(e.getKeyCode()));
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                System.out.println("Key Released: " + KeyEvent.getKeyText(e.getKeyCode()));
+            }
+        });
+
+        frame.pack();
+        frame.setVisible(true);
+    }
+}
+/////////////////////////////////////////////////////////////////////////////////
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class AllMouseEvents
+{
+public static void main(String[] args)
+{
+SwingUtilities.invokeLater(() -> {
+JFrame frame = new JFrame("MouseClick Event Demo");
+frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+JPanel panel = new JPanel();
+JLabel j1 = new JLabel();
+panel.add(j1);
+panel.setPreferredSize(new Dimension(300, 200));
+//Handling Mouse Click Event
+panel.addMouseListener(new MouseAdapter(){
+
+@Override
+public void mouseClicked (MouseEvent e) {
+JOptionPane.showMessageDialog(frame, "Mouse Clicked at ("+e.getX()+","+e.getY() + ")");
+}
+});
+
+//Handling Mouse Motion Event
+panel.addMouseMotionListener(new MouseAdapter() {
+@Override
+public void mouseMoved (MouseEvent e) {
+j1.setText("Mouse Moved at (" + e.getX()+", "+e.getY() + ")");
+
+}
+});
+//Handling Mouse Enter and Exit Event 
+panel.addMouseListener(new MouseAdapter() {
+@Override
+public void mouseEntered(MouseEvent e) { 
+frame.setTitle("Mouse Entered");
+}
+@Override
+public void mouseExited (MouseEvent e) {
+ frame.setTitle("Mouse Exited");
+}
+});
+frame.add(panel);
+frame.pack();
+frame.setVisible(true);
+});
+}
+}
+////////////////////////////////////////////////////////////////////////
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class BtnClkDemo 
+{
+public static void main(String[] args) 
+{
+JFrame frame = new JFrame("Button Click Demo");
+frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+JButton button = new JButton("Click Me");
+button.addActionListener(new ActionListener() 
+{ 
+@Override
+public void actionPerformed(ActionEvent e) 
+{
+JOptionPane.showMessageDialog(frame, "Button Clicked!");
+}
+});
+frame.getContentPane().add(button);
+frame.pack();
+frame.setVisible(true);
+}
+}
+
+////////////////////////////////////////////////////////////////////
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
+
+public class ChangeColor extends JFrame {
+    private JPanel colorPanel;
+    private JButton changeColorButton;
+
+    public ChangeColor() {
+        setTitle("Random Color Changer");
+        setSize(300, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Corrected this line
+        setLayout(new BorderLayout());
+        colorPanel = new JPanel(); // Corrected this line
+        changeColorButton = new JButton("Change Color");
+        add(colorPanel, BorderLayout.CENTER);
+        add(changeColorButton, BorderLayout.SOUTH);
+        changeColorButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changeColor();
+            }
+        });
+    }
+
+    private void changeColor() {
+        Random random = new Random(); // Corrected this line
+        Color randomColor = new Color(random.nextInt(256),
+                random.nextInt(256), random.nextInt(256));
+        colorPanel.setBackground(randomColor);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> { // Corrected this line
+            ChangeColor app = new ChangeColor();
+            app.setVisible(true);
+        });
+    }
+}
+////////////////////////////////////////////////////////////////////////
+import javax.swing.*;
+import java.awt.*;
+public class DemoFlowLayout
+{
+	public static void main(String s[])
+	{
+		JFrame frame=new JFrame("FLow Layout Example");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(300,100);
+		
+		JPanel panel= new JPanel(new FlowLayout(FlowLayout.RIGHT));
+
+		JButton b1= new JButton("Button1");
+		JButton b2= new JButton("Button2");
+		JButton b3= new JButton("Button3");
+	
+		panel.add(b1);
+		panel.add(b2);
+		panel.add(b3);
+
+		frame.add(panel);
+		frame.setVisible(true);
+	}
+}
+//////////////////////////////////////////////////////////////////
+import javax.swing.*;
+import java.awt.*;
+public class DemoGridLayout
+{
+	public static void main(String s[])
+	{
+		JFrame frame=new JFrame("FLow Layout Example");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(300,100);
+		
+		JPanel panel= new JPanel(new GridLayout(2,3));
+
+		JButton b1= new JButton("Button1");
+		JButton b2= new JButton("Button2");
+		JButton b3= new JButton("Button3");
+		JButton b4= new JButton("Button4");
+		JButton b5= new JButton("Button5");
+		JButton b6= new JButton("Button6");
+	
+		panel.add(b1);
+		panel.add(b2);
+		panel.add(b3);
+		panel.add(b4);
+		panel.add(b5);
+		panel.add(b6);
+
+		frame.add(panel);
+		frame.setVisible(true);
+	}
+
+}
+////////////////////////////////////////////////////////////////////
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class MenuItmClk {
+    public static void main(String[] args) {
+        // Create the main JFrame
+        JFrame frame = new JFrame("Menu Item Click Demo");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Close operation
+
+        // Create a menu bar
+        JMenuBar menuBar = new JMenuBar();
+
+        // Create a menu
+        JMenu fileMenu = new JMenu("File");
+
+        // Create a menu item
+        JMenuItem openItem = new JMenuItem("Open");
+
+        // Add ActionListener to the menu item
+        openItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Show a message dialog when the menu item is clicked
+                JOptionPane.showMessageDialog(frame, "File -> Open clicked!");
+            }
+        });
+
+        // Add the menu item to the menu
+        fileMenu.add(openItem);
+
+        // Add the menu to the menu bar
+        menuBar.add(fileMenu);
+
+        // Set the menu bar to the frame
+        frame.setJMenuBar(menuBar);
+
+        // Set the size of the frame
+        frame.setSize(400, 300);
+
+        // Make the frame visible
+        frame.setVisible(true);
+    }
+}
+//////////////////////////////////////////////////////////////////////////
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class SelectionEvents {
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Selection Events Demo");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            
+            String[] items = {"item1", "item2", "item3"};
+            JComboBox<String> comboBox = new JComboBox<>(items);
+            comboBox.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String selectedItem = (String) comboBox.getSelectedItem();
+                    System.out.println("Selected: " + selectedItem);
+                }
+            });
+
+            frame.add(comboBox, BorderLayout.CENTER);
+            frame.setSize(300, 200);
+            frame.setVisible(true);
+        });
+    }
+}
+//////////////////////////////////////////////////////////////////////
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent; // Added semicolon
+import java.awt.event.ActionListener; // Added semicolon
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class ShowFileInTextArea extends JFrame { // Renamed class and removed space in class name
+    private JTextArea textArea = new JTextArea(20, 40); // Added '=' instead of 'new'
+    private JButton openFileButton = new JButton("Open File"); // Added '=' instead of 'new'
+
+    public ShowFileInTextArea() { // Corrected method declaration
+        setTitle("File Viewer");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+
+        JScrollPane scrollPane = new JScrollPane(textArea); // Added 'new'
+        add(scrollPane, BorderLayout.CENTER);
+        add(openFileButton, BorderLayout.SOUTH);
+
+        openFileButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                openFile();
+            }
+        });
+
+        pack();
+        setLocationRelativeTo(null); // Corrected method name and added 'this.'
+    }
+
+    private void openFile() { // Corrected method declaration
+        JFileChooser fileChooser = new JFileChooser(); // Removed ':' and added semicolon
+        int result = fileChooser.showOpenDialog(this);
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(fileChooser.getSelectedFile()))) {
+                StringBuilder content = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    content.append(line).append("\n");
+                }
+                textArea.setLineWrap(true);
+                textArea.setText(content.toString());
+            } catch (IOException ex) { // Changed 'e' to 'ex' for clarity
+                JOptionPane.showMessageDialog(this, "Error reading the file.", "Error", JOptionPane.ERROR_MESSAGE); // Added semicolon and corrected constant name
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new ShowFileInTextArea().setVisible(true); // Corrected class name
+        });
+    }
+}
+////////////////////////////////////////////////////////////////////
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+public class TxtEntrKey
+ {
+public static void main(String[] args) 
+{
+JFrame frame = new JFrame("Text Field Enter Key Demo");
+frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+JTextField textField = new JTextField(20);
+textField.addActionListener(new ActionListener() 
+{ @Override
+public void actionPerformed(ActionEvent e) 
+{
+JOptionPane.showMessageDialog(frame,"Enter key pressed in text field.");
+}
+});
+frame.getContentPane().add(textField);
+frame.pack();
+frame.setVisible(true);
+}
+}
+//////////end///////////////////////////////////////////////////
 
