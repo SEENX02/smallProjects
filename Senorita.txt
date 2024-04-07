@@ -1,0 +1,398 @@
+class test{
+    private int a;
+    test(){
+        System.out.println("this is default constructor");
+    }
+    test(int a){
+        this.a=a;
+        System.out.println("this is parameterized constructor :"+a);
+    }
+    test(test obj){
+        a=obj.a;
+        System.out.println("this is copy constructor :"+a);
+    }
+}
+public class _1a{
+    public static void main(String[] args) {
+        test obj = new test();
+        test obj1 = new test(10);
+        test obj2 = new test(obj1);
+
+    }
+}
+
+/////////////////////////////////////////////////////
+class test{
+    public  void add(int a,int b){
+        System.out.println("a+b  :"+(a+b));
+    } 
+    public  void add(int a,int b,int c){
+        System.out.println("a+b+c  :"+(a+b+c));
+    }
+}
+
+
+public class _1b {
+
+public static void main(String[] args) {
+    test obj = new test();
+
+    obj.add(10, 20);
+    obj.add(10, 20, 30);
+}    
+}
+/////////////////////////////////////////////////////////////
+public class _1c {
+    public static void add(int a,int b){
+        System.out.println("a+b  :"+(a+b));
+    }
+
+    public static void sub(int a,int b){
+        System.out.println("a-b  :"+(a-b));
+    }
+    public static void main(String[] args) {
+        add(10, 20);
+        sub(100, 50);
+    }
+}
+////////////////////////////////////////////////////////
+public class _1c {
+    public static void add(int a,int b){
+        System.out.println("a+b  :"+(a+b));
+    }
+
+    public static void sub(int a,int b){
+        System.out.println("a-b  :"+(a-b));
+    }
+    public static void main(String[] args) {
+        add(10, 20);
+        sub(100, 50);
+    }
+}
+/////////////////////////////////////////////////////
+
+class a{
+    void show(){
+        System.out.println("This is base class ");
+    }
+}
+class b extends a{
+    void show(){
+        System.out.println("This is child class ");
+    }
+}
+
+public class _2a {
+    public static void main(String[] args) {
+        b obj = new b();
+        obj.show();
+        
+    }
+}
+//////////////////////////////////////////////////////
+abstract class shape{
+    abstract void area();
+}
+class circle extends shape{
+    int radius;
+    circle(int rad){
+radius=rad;
+    };
+    void area(){
+        System.out.println("area  :"+(3.14*radius*radius));
+    } 
+}
+public class _2b {
+    public static void main(String[] args) {
+        circle obj = new circle(10);
+        obj.area();
+    }
+}
+////////////////////////////////////////////////////////
+interface shape{
+	void area();
+}
+class circle implements shape{
+	private int radius;
+	circle(int r){
+		radius=r;
+	}
+	public void area(){
+		System.out.println("Area :"+(3.14*radius*radius));
+	}
+
+}
+
+public class _2c {
+	public static void main(String[] args){
+
+    circle obj= new circle(10);
+    obj.area();
+}
+}
+/////////////////////////////////////////////////////
+import java.util.*;
+
+public class _3a{
+public static void main(String[] args){
+Scanner sc= new Scanner(System.in);
+int a=sc.nextInt();
+int b=sc.nextInt();
+	try{
+		int result =a/b;System.out.println("result :"+result);}
+catch(Exception e){
+	System.out.println("Some thing went wrong"+e);
+}
+finally{
+System.out.println("Thanks for using !!!");
+sc.close();
+}
+}
+}
+//////////////////////////////////////////////////
+class myexception extends Exception{
+public myexception(String s){
+super(s);
+}
+}
+public class _3b{
+public static void main(String[] args){
+try{
+int age =-20;
+if (age<0){
+throw new myexception("age cannot be negative !!!");}
+System.out.println("age :"+age);
+}
+catch(myexception e){
+System.err.println("error:"+e.getMessage());
+}
+}
+}
+//////////////////////////////////////////////
+import javax.swing.*;
+import java.awt.event.*;
+
+public class AllFocusEvents {
+  public static void main(String[] args) {
+    JFrame frame = new JFrame("Focus Events Demo");
+    frame.setSize(300, 200);
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    JTextField textField = new JTextField(20);
+    textField.addFocusListener(new FocusAdapter() {
+
+      public void focusGained(FocusEvent e) {
+        System.out.println("Focus gained on text field");
+      }
+
+      public void focusLost(FocusEvent e) {
+        System.out.println("Focus lost on text field");
+      }
+    });
+    JPanel panel = new JPanel();
+    panel.add(textField);
+    frame.add(panel);
+    frame.setVisible(true);
+  }
+}
+/////////////////////////////////////////////////////////
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class AllMouseEvents {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("MouseClick Event Demo");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JPanel panel = new JPanel();
+        JLabel j1 = new JLabel();
+        panel.add(j1);
+        panel.setPreferredSize(new Dimension(300, 200));
+        panel.addMouseListener(new MouseAdapter() {
+    
+            public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(frame, "Mouse Clicked at (" + e.getX() + "," + e.getY() + ")");
+            }
+        });
+        panel.addMouseMotionListener(new MouseAdapter() {
+    
+            public void mouseMoved(MouseEvent e) {
+                j1.setText("Mouse Moved at (" + e.getX() + ", " + e.getY() + ")");
+            }
+        });
+
+        panel.addMouseListener(new MouseAdapter() {
+    
+            public void mouseEntered(MouseEvent e) {
+                frame.setTitle("Mouse Entered");
+            }
+
+            public void mouseExited(MouseEvent e) {
+                frame.setTitle("Mouse Exited");
+            }
+        });
+
+        frame.add(panel);
+        frame.pack();
+        frame.setVisible(true);
+    }
+}
+////////////////////////////////////////////////////////////
+import javax.swing.*;
+
+public class BtnClkDemo {
+    public static void main(String[] args) {
+        JFrame f = new JFrame("Button Click Demo");
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JButton b = new JButton("Click Me");
+        b.addActionListener(e -> JOptionPane.showMessageDialog(f,"Button Clicked!"));
+        f.add(b);
+        f.pack();
+        f.setVisible(true);
+    }
+}
+///////////////////////////////////////////////////////////
+import javax.swing.*;
+import java.awt.*;
+import java.util.*;
+public class ChangeColor extends JFrame {
+    JPanel colorPanel = new JPanel();
+    JButton changeColorButton = new JButton("Change Color");
+    public ChangeColor() {
+        setTitle("Random Color Changer");
+        setSize(300, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        add(colorPanel, BorderLayout.CENTER);
+        add(changeColorButton, BorderLayout.SOUTH);
+        changeColorButton.addActionListener(e -> changeColor());
+    }
+    private void changeColor() {
+        Random random = new Random();
+        Color randomColor = new Color(random.nextInt(256), random.nextInt(256), random.nextInt(256));
+        colorPanel.setBackground(randomColor);
+    }
+    public static void main(String[] args) {
+            ChangeColor app = new ChangeColor();
+            app.setVisible(true);
+    }
+}
+////////////////////////////////////////////////////////////////
+import javax.swing.*;
+import java.awt.*;
+
+public class DemoBorderLayout{
+public static void main(String[] args){
+JFrame frame = new JFrame();
+frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+frame.setSize(300,300);
+JPanel panel = new JPanel(new BorderLayout()); 
+		JButton b1= new JButton("East");
+		JButton b2= new JButton("west");
+		JButton b3= new JButton("north");
+		JButton b4= new JButton("south");
+		JButton b5= new JButton("center");
+	
+		panel.add(b1,BorderLayout.EAST);
+		panel.add(b2,BorderLayout.WEST);
+		panel.add(b3,BorderLayout.NORTH);
+		panel.add(b4,BorderLayout.SOUTH);
+		panel.add(b5,BorderLayout.CENTER);
+
+		frame.getContentPane().add(panel);
+		frame.setVisible(true);
+	}
+
+}
+///////////////////////////////////////////////////////
+import javax.swing.*;
+import java.awt.*;
+public class DemoFlowLayout
+{
+	public static void main(String s[])
+	{
+		JFrame frame=new JFrame("FLow Layout Example");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(300,100);
+		
+		JPanel panel= new JPanel(new FlowLayout(FlowLayout.RIGHT));
+
+		JButton b1= new JButton("Button1");
+		JButton b2= new JButton("Button2");
+		JButton b3= new JButton("Button3");
+	
+		panel.add(b1);
+		panel.add(b2);
+		panel.add(b3);
+
+		frame.add(panel);
+		frame.setVisible(true);
+	}
+}
+///////////////////////////////////////////////////////////
+import javax.swing.*;
+
+public class MenuItmClk {
+    public static void main(String[] args) {
+        JFrame f = new JFrame("Menu Item Click Demo");
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JMenuBar mb = new JMenuBar();
+        JMenu m = new JMenu("File");
+        JMenuItem mi = new JMenuItem("Open");
+        mi.addActionListener(e -> JOptionPane.showMessageDialog(f, "File -> Open clicked!"));
+        m.add(mi);
+        mb.add(m);
+        f.setJMenuBar(mb);
+        f.setSize(400, 300);
+        f.setVisible(true);
+    }
+}
+//////////////////////////////////////////////////////////
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class SelectionEvents {
+  public static void main(String[] args) {
+    JFrame frame = new JFrame("Selection Events Demo");
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    String[] items = {"item1", "item2", "item3"};
+    JComboBox<String> comboBox = new JComboBox<>(items);
+    comboBox.addActionListener(new ActionListener() {
+      
+      public void actionPerformed(ActionEvent e) {
+        String selectedItem = (String) comboBox.getSelectedItem();
+        System.out.println("Selected: " + selectedItem);
+      }
+    });
+    frame.add(comboBox, BorderLayout.CENTER);
+    frame.setSize(300, 200);
+    frame.setVisible(true);
+  }
+}
+///////////////////////////////////////////////////////////////////
+import javax.swing.*;
+import java.awt.*;
+import java.io.*;
+public class ShowFileInTextArea extends JFrame {
+     JTextArea textArea = new JTextArea(20, 40);
+     JButton openFileButton = new JButton("Open File");
+    public ShowFileInTextArea() {
+        setTitle("File Viewer");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        add(scrollPane);
+        add(openFileButton, BorderLayout.SOUTH);
+        openFileButton.addActionListener(e -> openFile());
+        pack();}
+        private void openFile() {
+            JFileChooser fileChooser = new JFileChooser();
+            if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
+                try (BufferedReader reader = new BufferedReader(new FileReader(fileChooser.getSelectedFile()))) {
+                    textArea.setLineWrap(true);
+                    textArea.read(reader, null);
+                } catch (IOException e) { e.printStackTrace(); }
+        }
+    public static void main(String[] args) {
+        ShowFileInTextArea app = new ShowFileInTextArea();
+        app.setVisible(true);}}
