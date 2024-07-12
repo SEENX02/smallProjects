@@ -1,0 +1,14 @@
+{
+    "Details":[
+        {
+            "Name":"Maaz Qureshi",
+            "Balance":2000,
+            "Pin":3786
+        }
+        {
+            "Name":"Qais Qureshi",
+            "Balance":4000,
+            "Pin":4786
+        }
+    ]
+}
